@@ -1,0 +1,60 @@
+[project]
+name = "evidence-retrieval-co"
+version = "0.1.0"
+description = "Evidence retrieval for Colombian misinformation: sourced, dated evidence instead of verdicts. Not a truth detector."
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+license = { text = "MIT" }
+authors = [{ name = "Daniel Felipe Sacristán Ávila" }]
+keywords = [
+    "nlp",
+    "information-retrieval",
+    "misinformation",
+    "fact-checking",
+    "colombia",
+    "spanish",
+]
+
+dependencies = [
+    "requests>=2.32",
+    "beautifulsoup4>=4.13",
+    "lxml>=5.2",
+    "pandas>=2.2",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+# RSS collection (roadmap phase 0). feedparser is imported lazily inside the
+# fetch path, so the base install — and CI, which installs [dev] only — never
+# pulls it. Retrieval/NLI/app/MLOps extras are added when their phases start.
+collect = [
+    "feedparser>=6.0",
+]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+    "pre-commit>=3.7",
+]
+
+[project.urls]
+Repository = "https://github.com/POLUX89/evidence-retrieval-co"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 88
+
+[tool.ruff.lint.per-file-ignores]
+# Exploratory notebooks (none yet): allow patterns that are idiomatic in EDA but
+# flagged by default — imports used further down (F401), imports after code
+# (E402), and compact one-liners / semicolon-separated statements (E701-E703).
+"*.ipynb" = ["F401", "E402", "E701", "E702", "E703"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,10 @@
+# Strip Jupyter notebook outputs before every commit so raw source text
+# (embedded in df previews) never lands in this public repo. Keeps the
+# Datasheet stance consistent and keeps notebook diffs clean.
+#
+# One-time setup after cloning:  pre-commit install
+repos:
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.9.1
+    hooks:
+      - id: nbstripout

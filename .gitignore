@@ -1,0 +1,19 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local corpus seed copied from v1 (NLP-Fake-News-Colombia @ 428dd76) — never
+# committed; provenance in docs/DATASHEET.md. data/registry/ IS tracked.
+data/cache/*
+data/raw/*
+!**/.gitkeep
+
+# OS
+.DS_Store
