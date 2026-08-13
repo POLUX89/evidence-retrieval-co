@@ -58,8 +58,8 @@ refetching.
 `data/registry/source_registry.csv` is the one committed derivation of the seed:
 which domains the fact-checks cite, how often, and in how many articles. It is
 domain-level only — `domain, tier, role, n_links, n_articles,
-scope_flag_partisan, sample_urls` (at most three sample URLs) — and contains **no
-article text**, the same stance v1 took.
+scope_flag_partisan, conflict_flag_government, sample_urls` (at most three
+sample URLs) — and contains **no article text**, the same stance v1 took.
 
 Built by `src/evidence_retrieval_co/source_registry.py`, fully offline:
 
@@ -100,6 +100,29 @@ Roles record what a link *does*: `internal` (self-references), `claim-source`
 (snapshots), `tool` (search, media forensics, file hosting — the checker's
 method) and `evidence` (everything else).
 
+### The two flags mark, they do not reclassify
+
+`scope_flag_partisan` marks party, campaign and politicians' personal sites —
+outside this project's non-partisan scope. `conflict_flag_government` marks the
+government's own voice: the presidency and vice-presidency families, which
+DESIGN.md §5 identifies as **not neutral primary sources when the claim is about
+the government**.
+
+Both stay flags rather than tiers on purpose. The presidency publishes each
+administration under its own subdomain of the official domain —
+`petro.presidencia.gov.co` (Petro), `id.`/`idm.` (Duque), `wp.`/`wsp.` (Santos),
+with `presidencia.gov.co` as the canonical site — and those subdomains carry
+decrees, bills and official communications. They are institutional sources, so
+they remain `official-co` (D3 seeds its permissions audit from that tier) while
+the flag records the conflict, so retrieval can require a counterweight:
+control bodies, courts, multilaterals, academia.
+
+Scope boundary, stated so it is auditable: the flag covers the presidency and
+vice-presidency families only. Ministries are executive too, but the corpus
+cites them mostly for technical data (epidemiology, statistics); whether to
+widen the flag to them is an open judgment call, as is the treatment of
+state-owned companies beyond the single `interested-party` tier.
+
 **Corrections** go in `data/registry/registry_overrides.csv`
 (`domain,tier_override,scope_flag_override,reason`), which the builder merges on
 every run — the generated CSV is never hand-edited, so re-running reproduces it
@@ -124,12 +147,18 @@ python -m evidence_retrieval_co.source_registry --top 40
 - **Partisan flagging is coarse by construction.** It catches 14 domains / 69
   links (party, campaign and politicians' personal sites). Claims about
   politicians arrive as social-platform links, so the real non-partisan scope
-  filter is topic-level routing (DESIGN.md §4A), not this flag. Note
-  `petro.presidencia.gov.co` is deliberately **not** flagged: it is the
-  institutional presidency site.
+  filter is topic-level routing (DESIGN.md §4A), not this flag. The presidency's
+  administration subdomains are deliberately **not** flagged here — they are
+  institutional publications and carry `conflict_flag_government` instead.
+- **Government voice is marked, not excluded:** 18 domains / 476 links across
+  four administrations (`presidencia.gov.co` and its `petro.`, `id.`, `idm.`,
+  `wp.`, `wsp.`, `es.`, `historico.`, `dapre.` subdomains, plus
+  `vicepresidencia.gov.co`). They stay `official-co`; downstream retrieval is
+  what must require a counterweight.
 - **Interested parties need manual marking.** State-owned companies and trade
   associations publish primary data with a declared interest (DESIGN.md §5);
-  only `ecopetrol.com.co` is marked so far.
+  only `ecopetrol.com.co` is marked so far, and ministries are not covered by
+  the government-voice flag.
 - **The registry inherits ColombiaCheck's authority criterion**, which is the
   warning in DESIGN.md §5: it must be audited and complemented with sources they
   do not cite, not adopted as-is.

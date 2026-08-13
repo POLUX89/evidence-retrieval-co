@@ -23,7 +23,10 @@ Extraction strategy (validated by a census of the full corpus):
 Each domain gets a role — what the link *does* in a fact-check (`internal`,
 `archive`, `claim-source`, `tool`, `evidence`) — and a tier — what kind of
 source it is (`fact-checker`, `archive`, `social`, `platform`, `official-co`,
-`intl-org`, `academic`, `press`, `other`). Both are heuristics: `other` means
+`intl-org`, `academic`, `press`, `other`) — plus two flags that mark, rather
+than reclassify: `scope_flag_partisan` (party/campaign sites, out of the
+project's non-partisan scope) and `conflict_flag_government` (the government's
+own voice, DESIGN.md §5). Both are heuristics: `other` means
 "needs human judgment", and corrections go through
 `data/registry/registry_overrides.csv` (see `apply_overrides`), never by
 editing the generated CSV — the overrides file may also introduce tier values
@@ -271,11 +274,16 @@ PRESS_DOMAINS = {
 # Flagged, never dropped — the scope filter (non-partisan misinformation) is
 # applied downstream, and dropping silently would hide it from audit.
 #
-# Domain-level flagging is coarse and catches little (~6 domains, 29 links in
+# Domain-level flagging is coarse and catches little (14 domains, 69 links in
 # the corpus): politicians' claims arrive as social-platform links, and the
-# real filter is topic-level routing (docs/DESIGN.md §4A). Note the deliberate
-# exclusion: `petro.presidencia.gov.co` is the OFFICIAL presidency site, an
-# institutional source — it stays `official-co` and unflagged.
+# real filter is topic-level routing (docs/DESIGN.md §4A).
+#
+# Deliberate exclusion: the presidency publishes each administration under its
+# own subdomain of its official domain — `petro.` (Petro), `id.`/`idm.`
+# (Duque), `wp.`/`wsp.` (Santos) — while `presidencia.gov.co` is the canonical
+# site. Those subdomains serve decrees, bills and official communications, so
+# they are institutional, not campaign sites: they stay `official-co` and
+# unflagged here, and carry the government-voice conflict flag instead.
 PARTISAN_DOMAINS = {
     # parties
     "centrodemocratico.com",
@@ -300,6 +308,22 @@ PARTISAN_DOMAINS = {
     "gustavopetroblog.wordpress.com",
 }
 
+# Executive voice: the government speaking about itself. Per DESIGN.md §5 the
+# government is not a neutral primary source when the claim is *about the
+# government*, so these are FLAGGED rather than retiered — they remain
+# `official-co` (they are official publications, and D3 seeds its permissions
+# audit from that tier), and the flag travels with them so retrieval can demand
+# a counterweight (control bodies, courts, multilaterals, academia).
+#
+# Scope boundary: the presidency and vice-presidency families only. Ministries
+# are executive too, but the corpus cites them mostly for technical data
+# (epidemiology, statistics); widening the flag to them — or to state-owned
+# companies beyond `interested-party` — is a judgment call left open.
+GOVERNMENT_VOICE_DOMAINS = {
+    "presidencia.gov.co",
+    "vicepresidencia.gov.co",
+}
+
 REGISTRY_COLUMNS = [
     "domain",
     "tier",
@@ -307,6 +331,7 @@ REGISTRY_COLUMNS = [
     "n_links",
     "n_articles",
     "scope_flag_partisan",
+    "conflict_flag_government",
     "sample_urls",
 ]
 
@@ -513,6 +538,22 @@ def is_partisan(domain: str) -> bool:
     return _matches(domain, PARTISAN_DOMAINS)
 
 
+def has_government_conflict(domain: str) -> bool:
+    """Flag official sources that are the government's own voice.
+
+    Args:
+        domain: Normalized host.
+
+    Returns:
+        True for the presidency / vice-presidency families (all administration
+        subdomains included). These stay `official-co`; the flag records the
+        structural conflict of interest described in DESIGN.md §5, so that a
+        claim *about the government* is not resolved with the government as
+        its only primary source.
+    """
+    return _matches(domain, GOVERNMENT_VOICE_DOMAINS)
+
+
 def apply_overrides(df: pd.DataFrame, overrides_path: Path) -> pd.DataFrame:
     """Apply manual corrections from the overrides CSV, if present.
 
@@ -535,6 +576,7 @@ def apply_overrides(df: pd.DataFrame, overrides_path: Path) -> pd.DataFrame:
     for src, dst in (
         ("tier_override", "tier"),
         ("scope_flag_override", "scope_flag_partisan"),
+        ("conflict_flag_override", "conflict_flag_government"),
     ):
         if src in ov.columns:
             vals = ov[src].dropna()
@@ -593,6 +635,7 @@ def build_registry(
                 "n_links": entry["n_links"],
                 "n_articles": len(entry["articles"]),
                 "scope_flag_partisan": is_partisan(domain),
+                "conflict_flag_government": has_government_conflict(domain),
                 "sample_urls": "|".join(sorted(entry["urls"])[:3]),
             }
         )

@@ -129,9 +129,41 @@ def test_partisan_flag():
     assert sr.is_partisan("apps.centrodemocratico.com") is True
     assert sr.is_partisan("ivanduque.com") is True
     assert sr.is_partisan("dane.gov.co") is False
-    # The presidency's own site is an institutional source, not a campaign.
-    assert sr.is_partisan("petro.presidencia.gov.co") is False
-    assert sr.infer_tier("petro.presidencia.gov.co", "evidence") == "official-co"
+
+
+def test_presidency_subdomains_are_institutional_not_campaign():
+    # The presidency publishes each administration under its own subdomain of
+    # the official domain (canonical site: presidencia.gov.co). Those serve
+    # decrees and official communications, so they are institutional sources.
+    for admin_site in (
+        "presidencia.gov.co",
+        "petro.presidencia.gov.co",
+        "id.presidencia.gov.co",
+        "wsp.presidencia.gov.co",
+    ):
+        assert sr.is_partisan(admin_site) is False
+        assert sr.infer_tier(admin_site, "evidence") == "official-co"
+
+
+def test_government_voice_is_flagged_but_stays_official():
+    # DESIGN.md §5: mark the structural conflict, do not retier the source.
+    for gov in (
+        "presidencia.gov.co",
+        "petro.presidencia.gov.co",
+        "dapre.presidencia.gov.co",
+        "vicepresidencia.gov.co",
+        "fmm.vicepresidencia.gov.co",
+    ):
+        assert sr.has_government_conflict(gov) is True
+        assert sr.infer_tier(gov, "evidence") == "official-co"
+    # Counterweights and technical agencies carry no such conflict.
+    for neutral in (
+        "dane.gov.co",
+        "contraloria.gov.co",
+        "corteconstitucional.gov.co",
+        "who.int",
+    ):
+        assert sr.has_government_conflict(neutral) is False
 
 
 def test_overrides_applied(tmp_path):
@@ -176,6 +208,11 @@ def test_committed_registry_is_wellformed():
     df = pd.read_csv(REGISTRY_CSV)
     assert list(df.columns) == sr.REGISTRY_COLUMNS
     assert df["domain"].is_unique
+    # The presidency family must be flagged and still count as official.
+    gov = df[df["domain"].str.endswith("presidencia.gov.co")]
+    assert len(gov) > 1
+    assert gov["conflict_flag_government"].all()
+    assert (gov["tier"] == "official-co").all()
     pairs = list(zip(df["n_links"], df["domain"]))
     assert pairs == sorted(pairs, key=lambda t: (-t[0], t[1]))
     assert (df["n_articles"] <= df["n_links"]).all()
