@@ -30,6 +30,13 @@ dependencies = [
 collect = [
     "feedparser>=6.0",
 ]
+# Exploratory notebooks (e.g. deriving the PERMISSIONS.md seed from the source
+# registry). Deliberately outside [dev]: CI installs [dev] only and has no use
+# for a Jupyter kernel. pandas is already a base dependency.
+eda = [
+    "ipykernel>=6.29",
+    "matplotlib>=3.8",
+]
 dev = [
     "pytest>=8.0",
     # Pinned to one minor series so CI is deterministic; bumping the pin (and
