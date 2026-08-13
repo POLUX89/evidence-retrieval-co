@@ -1,0 +1,9 @@
+domain,tier_override,scope_flag_override,reason
+comisiondelaverdad.co,official-co,,"State entity (Comision de la Verdad) publishing on a non-.gov.co domain; the suffix rule cannot see it"
+dejusticia.org,civil-society,,"Research and advocacy center cited as evidence; not press, academia or state"
+indepaz.org.co,civil-society,,"Peace and conflict research institute cited as evidence"
+moe.org.co,civil-society,,"Mision de Observacion Electoral: election observation NGO"
+pares.com.co,civil-society,,"Fundacion Paz y Reconciliacion: conflict research NGO"
+ideaspaz.org,civil-society,,"Fundacion Ideas para la Paz: conflict research think tank"
+hrw.org,civil-society,,"Human Rights Watch: international NGO, not an intergovernmental body"
+ecopetrol.com.co,interested-party,,"State-owned oil company: primary data with a declared interest (DESIGN.md 5)"
