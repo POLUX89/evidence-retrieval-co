@@ -32,7 +32,9 @@ collect = [
 ]
 dev = [
     "pytest>=8.0",
-    "ruff>=0.6",
+    # Pinned to one minor series so CI is deterministic; bumping the pin (and
+    # fixing whatever new defaults flag) is a deliberate act, not linter rot.
+    "ruff>=0.16,<0.17",
     "pre-commit>=3.7",
 ]
 
