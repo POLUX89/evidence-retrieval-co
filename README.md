@@ -46,7 +46,7 @@ architecture routes value judgments away from labeling entirely.
 | Deliverable | State |
 |---|---|
 | D1 · Scaffold, design doc, corpus seed, repo | done |
-| D2 · Offline source registry from the cached corpus | in progress |
+| D2 · Offline source registry from the cached corpus | done — [6,577 domains](data/registry/source_registry.csv) |
 | D3 · Permissions audit + gated collector skeleton | pending |
 
 The 8–12-month roadmap (phases 0–4) lives in [docs/DESIGN.md §9](docs/DESIGN.md).
