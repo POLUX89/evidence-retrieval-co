@@ -112,10 +112,17 @@ Both stay flags rather than tiers on purpose. The presidency publishes each
 administration under its own subdomain of the official domain —
 `petro.presidencia.gov.co` (Petro), `id.`/`idm.` (Duque), `wp.`/`wsp.` (Santos),
 with `presidencia.gov.co` as the canonical site — and those subdomains carry
-decrees, bills and official communications. They are institutional sources, so
-they remain `official-co` (D3 seeds its permissions audit from that tier) while
-the flag records the conflict, so retrieval can require a counterweight:
-control bodies, courts, multilaterals, academia.
+decrees, bills and official communications.
+
+**They stay in tier 1 deliberately.** An official publication is bound by legal
+and institutional standards, and it is frequently the primary record itself: a
+decree published there *is* the decree. The flag is therefore **not a doubt
+about accuracy**. It marks a different property — when the claim is about the
+government's own conduct or results, the government is not a neutral arbiter of
+it — and §5 asks for exactly that: a counterweight (control bodies, courts,
+multilaterals, academia) or an explicit marking in the output. Tier answers
+"how authoritative is this source?"; the flag answers "authoritative about
+*whom*?".
 
 Scope boundary, stated so it is auditable: the flag covers the presidency and
 vice-presidency families only. Ministries are executive too, but the corpus
