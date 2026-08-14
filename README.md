@@ -41,6 +41,13 @@ and science. National partisan politics is explicitly out of scope — a
 deliberate decision recorded in [docs/DESIGN.md §11](docs/DESIGN.md) — and the
 architecture routes value judgments away from labeling entirely.
 
+The evidence corpus is built from **institutional and scientific sources**:
+Colombian public bodies under Ley 1712, international organizations and academic
+literature. **Press collection is deferred**, because the audit found that the
+most-cited outlets forbid this use and lifting that would require written
+permission from each publisher — the full reasoning and every verdict are in
+[docs/PERMISSIONS.md](docs/PERMISSIONS.md).
+
 ## Status — bootstrap
 
 | Deliverable | State |

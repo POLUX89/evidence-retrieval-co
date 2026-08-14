@@ -16,6 +16,7 @@ green, it must state what that clearance covers before any collection runs.
 | **amber** | Partial or reactive opt-out. Consult, or request permission, before ingesting. |
 | **red** | Refused: an explicit prohibition in the ToS, or a comprehensive anti-AI opt-out in robots.txt. |
 | **pending** | Not yet reviewed. Treated exactly like red by the collector. |
+| **out-of-scope** | Not pursued **by our decision**, not by the source's refusal. Also treated like red. |
 
 Status was assigned by an explicit, conservative rule so it can be audited:
 `red` when the Terms of Service prohibit what this project would do — download,
@@ -46,8 +47,15 @@ Crawlers checked on every domain: `Google-Extended`, `GPTBot`, `ChatGPT-User`,
 **Ley 1712 de 2014** makes public information accessible by default and enables
 a formal request with legal deadlines. Official sources also have downloadable
 history, so tier 1 can be built without waiting for accumulation — it has no
-clock. The press does: RSS has no archive, so what is not collected today will
-not exist in three months (DESIGN.md §9).
+clock. The press did have one, because RSS keeps no archive; with tier 2
+deferred, **nothing in this project is deadline-bound any more**, and the audit
+below can proceed institution by institution.
+
+For tier 1 the question also changes shape. It stops being *whether* we may
+collect — Ley 1712 answers that — and becomes *how*: an open-data portal, a
+Socrata API, or a bulk download (DESIGN.md §5). That is why 36 of the 74 domains
+below have no robots.txt at all: it is not permission, it is the absence of a
+machine-readable restriction on sources whose access is governed by statute.
 
 ## How this seed was built
 
@@ -114,7 +122,19 @@ makes them **formal-request candidates rather than closed doors**, unlike El
 Tiempo's targeted opt-out from AI training. That request is a decision carried
 in [`NEXT.md`](../NEXT.md).
 
-## Press (tier 2 — the one with a clock)
+## Press (tier 2 — deferred)
+
+> **Press collection is deferred (2026-08-14).** The three most-cited outlets
+> refuse this use, and lifting those refusals would mean requesting written
+> permission from each publisher — a path this project is not pursuing. Tier 2
+> is therefore deferred, not deleted: the corpus is built from tier 1 and
+> scientific sources instead (DESIGN.md §5), and this table remains as the
+> documented reason.
+>
+> Individual verdicts are kept rather than overwritten, because they record
+> different facts: **red** and **amber** are what the source said, while
+> **out-of-scope** marks the rows we chose never to review. Every one of them is
+> refused by the collector either way.
 
 | Domain | Host | Articles | robots.txt | AI agents blocked | ToS (AI/mining) | Status | Reviewed |
 |---|---|---:|---|---|---|---|---|
@@ -124,23 +144,23 @@ in [`NEXT.md`](../NEXT.md).
 | semana.com | — | 447 | partial | none found | no licence to copy/transform/compile | **red** | 2026-08-14 |
 | elpais.com | — | 412 | partial | 4: CCBot, ClaudeBot, PerplexityBot, Bytespider | not reviewed | **amber** | 2026-08-14 |
 | bbc.com | — | 400 | partial | 10: Google-Extended, GPTBot, ChatGPT-User, CCBot, ClaudeBot, anthropic-ai, PerplexityBot, Applebot-Extended, Bytespider, meta-externalagent | not reviewed | **red** | 2026-08-14 |
-| infobae.com | — | 358 | partial | none found | not reviewed | **pending** | 2026-08-14 |
-| elcolombiano.com | — | 272 | partial | none found | not reviewed | **pending** | 2026-08-14 |
-| caracol.com.co | — | 252 | partial | none found | not reviewed | **pending** | 2026-08-14 |
+| infobae.com | — | 358 | partial | none found | not reviewed | **out-of-scope** | 2026-08-14 |
+| elcolombiano.com | — | 272 | partial | none found | not reviewed | **out-of-scope** | 2026-08-14 |
+| caracol.com.co | — | 252 | partial | none found | not reviewed | **out-of-scope** | 2026-08-14 |
 | cnnespanol.cnn.com | — | 223 | partial | 10: Google-Extended, GPTBot, ChatGPT-User, CCBot, ClaudeBot, anthropic-ai, PerplexityBot, Applebot-Extended, Bytespider, meta-externalagent | not reviewed | **red** | 2026-08-14 |
 | portafolio.co | — | 199 | partial | 9: Google-Extended, GPTBot, ChatGPT-User, CCBot, ClaudeBot, anthropic-ai, PerplexityBot, Bytespider, meta-externalagent | not reviewed | **red** | 2026-08-14 |
-| wradio.com.co | — | 194 | partial | none found | not reviewed | **pending** | 2026-08-14 |
-| larepublica.co | — | 174 | partial | none found | not reviewed | **pending** | 2026-08-14 |
-| rcnradio.com | — | 170 | partial | none found | not reviewed | **pending** | 2026-08-14 |
+| wradio.com.co | — | 194 | partial | none found | not reviewed | **out-of-scope** | 2026-08-14 |
+| larepublica.co | — | 174 | partial | none found | not reviewed | **out-of-scope** | 2026-08-14 |
+| rcnradio.com | — | 170 | partial | none found | not reviewed | **out-of-scope** | 2026-08-14 |
 | dw.com | — | 166 | partial | 10: Google-Extended, GPTBot, ChatGPT-User, CCBot, ClaudeBot, anthropic-ai, PerplexityBot, Applebot-Extended, Bytespider, meta-externalagent | not reviewed | **red** | 2026-08-14 |
 | bluradio.com | — | 163 | partial | 2: GPTBot, ChatGPT-User | not reviewed | **amber** | 2026-08-14 |
 | nytimes.com | — | 152 | partial | 10: Google-Extended, GPTBot, ChatGPT-User, CCBot, ClaudeBot, anthropic-ai, PerplexityBot, Applebot-Extended, Bytespider, meta-externalagent | not reviewed | **red** | 2026-08-14 |
 | france24.com | — | 150 | allowed | 7: Google-Extended, GPTBot, ChatGPT-User, CCBot, ClaudeBot, anthropic-ai, PerplexityBot | not reviewed | **red** | 2026-08-14 |
-| elpais.com.co | — | 141 | partial | none found | not reviewed | **pending** | 2026-08-14 |
+| elpais.com.co | — | 141 | partial | none found | not reviewed | **out-of-scope** | 2026-08-14 |
 | reuters.com | — | 136 | blocked | 1: ChatGPT-User | not reviewed | **amber** | 2026-08-14 |
 | elheraldo.co | — | 132 | partial | 5: GPTBot, CCBot, ClaudeBot, PerplexityBot, Bytespider | not reviewed | **amber** | 2026-08-14 |
-| lafm.com.co | — | 105 | partial | none found | not reviewed | **pending** | 2026-08-14 |
-| cambiocolombia.com | — | 92 | partial | none found | not reviewed | **pending** | 2026-08-14 |
+| lafm.com.co | — | 105 | partial | none found | not reviewed | **out-of-scope** | 2026-08-14 |
+| cambiocolombia.com | — | 92 | partial | none found | not reviewed | **out-of-scope** | 2026-08-14 |
 | vanguardia.com | — | 87 | partial | 5: Google-Extended, GPTBot, ChatGPT-User, CCBot, anthropic-ai | not reviewed | **amber** | 2026-08-14 |
 
 ## Official sources (tier 1 — grouped by institution)

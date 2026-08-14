@@ -37,6 +37,16 @@ def test_gate_refuses_every_non_green_status(status):
     assert "PERMISSIONS.md" in message
 
 
+def test_out_of_scope_is_refused_as_a_decision_not_a_refusal():
+    # The wording matters: this source did not say no, we chose not to ask.
+    with pytest.raises(collect.PermissionGateError) as exc:
+        collect.assert_fetch_allowed(_source("out-of-scope"))
+    message = str(exc.value)
+    assert "out of scope by project decision" in message
+    assert "not by refusal" in message
+    assert "audit_status" not in message
+
+
 def test_gate_runs_before_any_fetch():
     stub = RecordingFetcher()
     with pytest.raises(collect.PermissionGateError):

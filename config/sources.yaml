@@ -404,23 +404,23 @@ sources:
     domain: infobae.com
     entity: infobae.com
     tier: press
-    audit_status: pending
+    audit_status: out-of-scope
     rss_url: null
-    notes: ""
+    notes: "Press collection deferred by project decision (2026-08-14): no permission requests will be sent, so this domain was never reviewed."
   - name: El Colombiano
     domain: elcolombiano.com
     entity: elcolombiano.com
     tier: press
-    audit_status: pending
+    audit_status: out-of-scope
     rss_url: null
-    notes: ""
+    notes: "Press collection deferred by project decision (2026-08-14): no permission requests will be sent, so this domain was never reviewed."
   - name: Caracol Radio
     domain: caracol.com.co
     entity: caracol.com.co
     tier: press
-    audit_status: pending
+    audit_status: out-of-scope
     rss_url: null
-    notes: ""
+    notes: "Press collection deferred by project decision (2026-08-14): no permission requests will be sent, so this domain was never reviewed."
   - name: CNN en Espanol
     domain: cnnespanol.cnn.com
     entity: cnn.com
@@ -439,23 +439,23 @@ sources:
     domain: wradio.com.co
     entity: wradio.com.co
     tier: press
-    audit_status: pending
+    audit_status: out-of-scope
     rss_url: null
-    notes: ""
+    notes: "Press collection deferred by project decision (2026-08-14): no permission requests will be sent, so this domain was never reviewed."
   - name: La Republica
     domain: larepublica.co
     entity: larepublica.co
     tier: press
-    audit_status: pending
+    audit_status: out-of-scope
     rss_url: null
-    notes: ""
+    notes: "Press collection deferred by project decision (2026-08-14): no permission requests will be sent, so this domain was never reviewed."
   - name: RCN Radio
     domain: rcnradio.com
     entity: rcnradio.com
     tier: press
-    audit_status: pending
+    audit_status: out-of-scope
     rss_url: null
-    notes: ""
+    notes: "Press collection deferred by project decision (2026-08-14): no permission requests will be sent, so this domain was never reviewed."
   - name: Deutsche Welle
     domain: dw.com
     entity: dw.com
@@ -488,9 +488,9 @@ sources:
     domain: elpais.com.co
     entity: elpais.com.co
     tier: press
-    audit_status: pending
+    audit_status: out-of-scope
     rss_url: null
-    notes: ""
+    notes: "Press collection deferred by project decision (2026-08-14): no permission requests will be sent, so this domain was never reviewed."
   - name: Reuters
     domain: reuters.com
     entity: reuters.com
@@ -509,16 +509,16 @@ sources:
     domain: lafm.com.co
     entity: lafm.com.co
     tier: press
-    audit_status: pending
+    audit_status: out-of-scope
     rss_url: null
-    notes: ""
+    notes: "Press collection deferred by project decision (2026-08-14): no permission requests will be sent, so this domain was never reviewed."
   - name: Cambio
     domain: cambiocolombia.com
     entity: cambiocolombia.com
     tier: press
-    audit_status: pending
+    audit_status: out-of-scope
     rss_url: null
-    notes: ""
+    notes: "Press collection deferred by project decision (2026-08-14): no permission requests will be sent, so this domain was never reviewed."
   - name: Vanguardia
     domain: vanguardia.com
     entity: vanguardia.com

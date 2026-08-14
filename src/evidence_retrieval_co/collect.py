@@ -23,7 +23,11 @@ import yaml
 
 from evidence_retrieval_co import paths
 
-AUDIT_STATUSES = ("green", "amber", "red", "pending")
+# `out-of-scope` records our own decision not to pursue a source, which is a
+# different fact from the source refusing us (`red`) or from an unfinished
+# review (`pending`). Conflating them would make the audit look like a wall of
+# rejections when part of it is simply a narrowing of the project.
+AUDIT_STATUSES = ("green", "amber", "red", "pending", "out-of-scope")
 REQUIRED_FIELDS = ("name", "domain", "tier", "audit_status")
 
 
@@ -105,6 +109,12 @@ def assert_fetch_allowed(source: Source) -> None:
         PermissionGateError: Unless `audit_status` is `green` and a feed URL is
             configured.
     """
+    if source.audit_status == "out-of-scope":
+        raise PermissionGateError(
+            f"Refusing to fetch {source.name!r} ({source.domain}): the source is "
+            f"out of scope by project decision, not by refusal. See "
+            f"docs/PERMISSIONS.md."
+        )
     if source.audit_status != "green":
         raise PermissionGateError(
             f"Refusing to fetch {source.name!r} ({source.domain}): audit_status "
