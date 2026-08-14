@@ -13,6 +13,12 @@ dist/
 # committed; provenance in docs/DATASHEET.md. data/registry/ IS tracked.
 data/cache/*
 data/raw/*
+
+# Bibliography and methodology drafts (Consensus searches exported to .docx).
+# Local-only: binary documents that do not diff, and they quote copyrighted
+# abstracts. Conclusions belong in the tracked docs, not here.
+docs/methodology/*
+
 !**/.gitkeep
 
 # OS
