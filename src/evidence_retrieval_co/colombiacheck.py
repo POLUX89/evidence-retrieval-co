@@ -38,48 +38,56 @@ HEADERS = {
 SLEEP_SECONDS = 1.5
 
 
-def cache_key(url: str) -> str:
+def cache_key(url: str, suffix: str = ".html") -> str:
     """Map a URL to its on-disk cache filename.
 
-    Byte-identical to v1's algorithm so the corpus copied from v1's
-    `recon_cache/` resolves to cache hits.
+    With the default suffix this is byte-identical to v1's algorithm, so the
+    corpus copied from v1's `recon_cache/` resolves to cache hits.
 
     Args:
         url: Absolute URL of the page.
+        suffix: File extension for the cache entry; override for non-HTML
+            resources such as `robots.txt`.
 
     Returns:
         Cache filename: non-alphanumerics collapsed to `_`, truncated to 150
-        characters, plus the `.html` suffix.
+        characters, plus the suffix.
     """
-    return re.sub(r"[^A-Za-z0-9]+", "_", url)[:150] + ".html"
+    return re.sub(r"[^A-Za-z0-9]+", "_", url)[:150] + suffix
 
 
 def get(
     url: str,
     session: requests.Session,
     cache_dir: Path = CACHE_COLOMBIACHECK,
+    suffix: str = ".html",
+    timeout: int = 30,
+    retries: int = 3,
 ) -> str | None:
-    """Fetch a page politely, with an on-disk cache.
+    """Fetch a resource politely, with an on-disk cache.
 
     Cache hits are plain file reads: no network access, no sleep. Cache misses
-    make up to three attempts with an identifying User-Agent, sleep
+    make up to `retries` attempts with an identifying User-Agent, sleep
     `SLEEP_SECONDS` after each live request, and back off on failures.
 
     Args:
         url: Absolute URL to fetch.
         session: A `requests.Session`, reused across calls for keep-alive.
-        cache_dir: Directory holding the HTML cache; created if missing.
+        cache_dir: Directory holding the cache; created if missing.
+        suffix: Cache-file extension (see `cache_key`).
+        timeout: Per-request timeout in seconds.
+        retries: Attempts before giving up.
 
     Returns:
-        The page HTML, or None on 404 or after three failed attempts.
+        The response body, or None on 404 or after all attempts fail.
     """
     cache_dir.mkdir(parents=True, exist_ok=True)
-    cached = cache_dir / cache_key(url)
+    cached = cache_dir / cache_key(url, suffix)
     if cached.exists():
         return cached.read_text(encoding="utf-8")
-    for attempt in range(3):
+    for attempt in range(retries):
         try:
-            resp = session.get(url, headers=HEADERS, timeout=30)
+            resp = session.get(url, headers=HEADERS, timeout=timeout)
             time.sleep(SLEEP_SECONDS)
             if resp.status_code == 200:
                 cached.write_text(resp.text, encoding="utf-8")
