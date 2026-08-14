@@ -75,6 +75,49 @@ def test_domain_normalization():
     )
 
 
+def test_entity_merges_subdomains_into_one_organization():
+    assert sr.entity_of("leyes.senado.gov.co") == "senado.gov.co"
+    assert sr.entity_of("petro.presidencia.gov.co") == "presidencia.gov.co"
+    assert sr.entity_of("wsr.registraduria.gov.co") == "registraduria.gov.co"
+    assert sr.entity_of("cnnespanol.cnn.com") == "cnn.com"
+    # Already registrable: unchanged.
+    assert sr.entity_of("dane.gov.co") == "dane.gov.co"
+    assert sr.entity_of("elpais.com.co") == "elpais.com.co"
+    assert sr.entity_of("comisiondelaverdad.co") == "comisiondelaverdad.co"
+
+
+def test_entity_keeps_platform_hosted_sites_separate():
+    # Collapsing these would file an author's blog under the hosting platform.
+    assert sr.entity_of("gustavopetroblog.wordpress.com") == (
+        "gustavopetroblog.wordpress.com"
+    )
+    assert sr.entity_of("someone.blogspot.com") == "someone.blogspot.com"
+
+
+def test_entity_groups_subdomains_by_organization():
+    # Permission is requested per institution, so subdomains collapse.
+    assert sr.entity_of("leyes.senado.gov.co") == "senado.gov.co"
+    assert sr.entity_of("petro.presidencia.gov.co") == "presidencia.gov.co"
+    assert sr.entity_of("wsr.registraduria.gov.co") == "registraduria.gov.co"
+    assert sr.entity_of("dane.gov.co") == "dane.gov.co"
+    assert sr.entity_of("cnnespanol.cnn.com") == "cnn.com"
+    assert sr.entity_of("share.evernote.com") == "evernote.com"
+
+
+def test_entity_keeps_multi_label_suffixes_and_short_domains():
+    assert sr.entity_of("elpais.com.co") == "elpais.com.co"
+    assert sr.entity_of("bbc.co.uk") == "bbc.co.uk"
+    assert sr.entity_of("comisiondelaverdad.co") == "comisiondelaverdad.co"
+
+
+def test_entity_does_not_merge_platform_hosted_sites():
+    # Collapsing these would file a partisan blog under "wordpress.com".
+    assert sr.entity_of("gustavopetroblog.wordpress.com") == (
+        "gustavopetroblog.wordpress.com"
+    )
+    assert sr.entity_of("someone.github.io") == "someone.github.io"
+
+
 def test_role_classification():
     assert sr.classify_role("colombiacheck.com") == "internal"
     assert sr.classify_role("archivo.colombiacheck.com") == "internal"

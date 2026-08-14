@@ -324,8 +324,47 @@ GOVERNMENT_VOICE_DOMAINS = {
     "vicepresidencia.gov.co",
 }
 
+# Public suffixes where the registrable name keeps three labels instead of two.
+# Not the full Public Suffix List — just what this corpus actually cites, which
+# avoids a dependency whose data ships separately from the code.
+MULTI_LABEL_SUFFIXES = (
+    ".gov.co",
+    ".mil.co",
+    ".edu.co",
+    ".com.co",
+    ".org.co",
+    ".net.co",
+    ".gob.mx",
+    ".com.mx",
+    ".com.ar",
+    ".com.br",
+    ".gov.br",
+    ".com.pe",
+    ".com.ve",
+    ".co.uk",
+    ".org.uk",
+    ".ac.uk",
+    ".or.cr",
+)
+
+# Hosting platforms where the SUBDOMAIN is the identity: collapsing these would
+# merge unrelated authors into a single "entity"
+# (`gustavopetroblog.wordpress.com` is not WordPress).
+HOSTING_SUFFIXES = (
+    ".wordpress.com",
+    ".blogspot.com",
+    ".blogspot.com.co",
+    ".medium.com",
+    ".substack.com",
+    ".tumblr.com",
+    ".github.io",
+    ".wixsite.com",
+    ".weebly.com",
+)
+
 REGISTRY_COLUMNS = [
     "domain",
+    "entity",
     "tier",
     "role",
     "n_links",
@@ -455,6 +494,32 @@ def _matches(domain: str, known: set[str]) -> bool:
         Whether the domain belongs to the set's family.
     """
     return domain in known or any(domain.endswith("." + d) for d in known)
+
+
+def entity_of(domain: str) -> str:
+    """Reduce a host to the organization behind it.
+
+    Permission is requested per institution, not per hostname, so the audit
+    unit is this value: `leyes.senado.gov.co` and `senado.gov.co` are one
+    Senate, and the presidency's 16 administration subdomains are one office.
+
+    Args:
+        domain: Normalized host from `domain_of`.
+
+    Returns:
+        The registrable domain, or the full host for platform-hosted sites
+        where the subdomain carries the identity.
+
+    Note:
+        String-based, so it merges subdomains but cannot merge sibling domains
+        of one organization (`secretariasenado.gov.co` stays separate from
+        `senado.gov.co`). Correct those in the overrides file.
+    """
+    if domain.endswith(HOSTING_SUFFIXES):
+        return domain
+    keep = 3 if domain.endswith(MULTI_LABEL_SUFFIXES) else 2
+    parts = domain.split(".")
+    return ".".join(parts[-keep:]) if len(parts) > keep else domain
 
 
 def classify_role(domain: str) -> str:
@@ -630,6 +695,7 @@ def build_registry(
         rows.append(
             {
                 "domain": domain,
+                "entity": entity_of(domain),
                 "tier": infer_tier(domain, role),
                 "role": role,
                 "n_links": entry["n_links"],

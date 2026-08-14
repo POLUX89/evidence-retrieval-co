@@ -441,6 +441,38 @@ the most common way a project dies in the design phase.
 > original is archived as [`DESIGN.es.md`](DESIGN.es.md). Decisions 3 and 5
 > remain **open** and are tracked in [`NEXT.md`](../NEXT.md).
 
+> **Bootstrap note (scope, 2026-08-14): tier 2 deferred, decision 3 resolved.**
+> The permissions audit came back negative for the press: the three most-cited
+> outlets all refuse this use — El Tiempo by naming mining and AI training,
+> El Espectador and Semana through copyright clauses that forbid downloading,
+> storing, transforming and compiling their content, expressly including
+> gratuitous use. Lifting any of those requires written permission from each
+> publisher, and **decision 3 is resolved as "discard": no formal requests will
+> be sent.** Press collection is therefore **deferred, not deleted** —
+> [`PERMISSIONS.md`](PERMISSIONS.md) keeps the audit as the documented reason.
+>
+> Three consequences follow, and they change this document's assumptions:
+>
+> 1. **§9's priority rule no longer applies.** "The RSS cron is the only thing
+>    with a clock" was true because press feeds have no archive. Tier 1 has
+>    downloadable history under Ley 1712, so nothing in the roadmap is now
+>    deadline-bound. The forcing function is gone, which §9 itself warns is how
+>    projects die in the design phase.
+> 2. **§4B's second retrieval pass and §4D's "mixed / disputed evidence" output
+>    wait with tier 2.** Editorial disagreement needs outlets of different
+>    editorial lines; without them there is nothing to contrast.
+> 3. **Recency degrades, as §12 anticipated.** Tier 1 publishes monthly or
+>    quarterly, so claims about recent events will often have no evidence and
+>    the system will abstain. That is a limitation to declare, not a defect.
+>
+> What the corpus loses is smaller than it looks: measured over the seed
+> corpus, non-press evidence sources carry 13,290 in-body citations against the
+> press's 10,111. Fact-checkers cite institutions and science more than media.
+> The gap is topical rather than volumetric — health and science are very well
+> served (WHO, CDC, PAHO, PubMed, Nature, The Lancet), while disaster sources
+> are thin and must be added deliberately, exactly as §5 warns about inheriting
+> ColombiaCheck's authority criterion.
+
 ---
 
 ## 12. Limitations to declare from day one

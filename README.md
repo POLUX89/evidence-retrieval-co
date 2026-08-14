@@ -41,13 +41,24 @@ and science. National partisan politics is explicitly out of scope — a
 deliberate decision recorded in [docs/DESIGN.md §11](docs/DESIGN.md) — and the
 architecture routes value judgments away from labeling entirely.
 
+The evidence corpus is built from **institutional and scientific sources**:
+Colombian public bodies under Ley 1712, international organizations and academic
+literature. **Press collection is deferred**, because the audit found that the
+most-cited outlets forbid this use and lifting that would require written
+permission from each publisher — the full reasoning and every verdict are in
+[docs/PERMISSIONS.md](docs/PERMISSIONS.md).
+
 ## Status — bootstrap
 
 | Deliverable | State |
 |---|---|
 | D1 · Scaffold, design doc, corpus seed, repo | done |
 | D2 · Offline source registry from the cached corpus | done — [6,577 domains](data/registry/source_registry.csv) |
-| D3 · Permissions audit + gated collector skeleton | pending |
+| D3 · Permissions audit + gated collector skeleton | done — [74 domains audited](docs/PERMISSIONS.md) |
+
+Roadmap **phase 0** (permissions audit + RSS cron running) is in progress: the
+audit exists and the collector is gated, but no domain is cleared yet, so
+nothing is being collected. Next steps in [NEXT.md](NEXT.md).
 
 The 8–12-month roadmap (phases 0–4) lives in [docs/DESIGN.md §9](docs/DESIGN.md).
 
