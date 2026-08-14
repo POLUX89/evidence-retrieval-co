@@ -1,0 +1,528 @@
+# Source configuration for the gated collector.
+#
+# audit_status MUST mirror the row in docs/PERMISSIONS.md. The collector
+# (src/evidence_retrieval_co/collect.py) refuses anything that is not 'green'.
+#
+# Every rss_url is null until its domain is cleared: a second lock, so even a
+# mistaken 'green' has nothing to fetch. Seeded 2026-08-14 from the source
+# registry and the robots.txt audit.
+version: 1
+sources:
+  - name: Funcion Publica
+    domain: funcionpublica.gov.co
+    entity: funcionpublica.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Ministerio de Salud
+    domain: minsalud.gov.co
+    entity: minsalud.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Secretaria del Senado
+    domain: secretariasenado.gov.co
+    entity: secretariasenado.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: DANE
+    domain: dane.gov.co
+    entity: dane.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Corte Constitucional
+    domain: corteconstitucional.gov.co
+    entity: corteconstitucional.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Camara de Representantes
+    domain: camara.gov.co
+    entity: camara.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Fiscalia General
+    domain: fiscalia.gov.co
+    entity: fiscalia.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: JEP
+    domain: jep.gov.co
+    entity: jep.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Comision de la Verdad
+    domain: comisiondelaverdad.co
+    entity: comisiondelaverdad.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Banco de la Republica
+    domain: banrep.gov.co
+    entity: banrep.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Cancilleria
+    domain: cancilleria.gov.co
+    entity: cancilleria.gov.co
+    tier: official-co
+    audit_status: red
+    rss_url: null
+    notes: "Only official domain with an anti-AI clause. Worth a formal request under Ley 1712."
+  - name: Suin Juriscol
+    domain: suin-juriscol.gov.co
+    entity: suin-juriscol.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Senado de la Republica
+    domain: leyes.senado.gov.co
+    entity: senado.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Ministerio de Hacienda
+    domain: minhacienda.gov.co
+    entity: minhacienda.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: INS
+    domain: ins.gov.co
+    entity: ins.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Altocomisionadoparalapaz
+    domain: altocomisionadoparalapaz.gov.co
+    entity: altocomisionadoparalapaz.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Presidencia de la Republica
+    domain: petro.presidencia.gov.co
+    entity: presidencia.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Centrodememoriahistorica
+    domain: centrodememoriahistorica.gov.co
+    entity: centrodememoriahistorica.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Minciencias
+    domain: scienti.minciencias.gov.co
+    entity: minciencias.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Procuraduria General
+    domain: procuraduria.gov.co
+    entity: procuraduria.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Registraduria Nacional
+    domain: registraduria.gov.co
+    entity: registraduria.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Bogota
+    domain: bogota.gov.co
+    entity: bogota.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Policia Nacional
+    domain: policia.gov.co
+    entity: policia.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Alcaldiabogota
+    domain: alcaldiabogota.gov.co
+    entity: alcaldiabogota.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: DNP
+    domain: colaboracion.dnp.gov.co
+    entity: dnp.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Mindefensa
+    domain: mindefensa.gov.co
+    entity: mindefensa.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Cortesuprema
+    domain: cortesuprema.gov.co
+    entity: cortesuprema.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: INVIMA
+    domain: invima.gov.co
+    entity: invima.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: CNE
+    domain: cne.gov.co
+    entity: cne.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Colciencias
+    domain: scienti.colciencias.gov.co
+    entity: colciencias.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Mintrabajo
+    domain: mintrabajo.gov.co
+    entity: mintrabajo.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Defensoria del Pueblo
+    domain: defensoria.gov.co
+    entity: defensoria.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Migracioncolombia
+    domain: migracioncolombia.gov.co
+    entity: migracioncolombia.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Medicina Legal
+    domain: medicinalegal.gov.co
+    entity: medicinalegal.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Contraloria General
+    domain: contraloria.gov.co
+    entity: contraloria.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Consejodeestado
+    domain: consejodeestado.gov.co
+    entity: consejodeestado.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Contratos
+    domain: contratos.gov.co
+    entity: contratos.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Imprenta
+    domain: svrpubindc.imprenta.gov.co
+    entity: imprenta.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Ministerio de Educacion
+    domain: mineducacion.gov.co
+    entity: mineducacion.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Ramajudicial
+    domain: ramajudicial.gov.co
+    entity: ramajudicial.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: SECOP
+    domain: community.secop.gov.co
+    entity: secop.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Minambiente
+    domain: minambiente.gov.co
+    entity: minambiente.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: CALI
+    domain: cali.gov.co
+    entity: cali.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Unidadvictimas
+    domain: unidadvictimas.gov.co
+    entity: unidadvictimas.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Mintic
+    domain: mintic.gov.co
+    entity: mintic.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Prosperidadsocial
+    domain: prosperidadsocial.gov.co
+    entity: prosperidadsocial.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Mininterior
+    domain: mininterior.gov.co
+    entity: mininterior.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: IDEAM
+    domain: ideam.gov.co
+    entity: ideam.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: CREG
+    domain: creg.gov.co
+    entity: creg.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Supersalud
+    domain: supersalud.gov.co
+    entity: supersalud.gov.co
+    tier: official-co
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: El Tiempo
+    domain: eltiempo.com
+    entity: eltiempo.com
+    tier: press
+    audit_status: red
+    rss_url: null
+    notes: "Legal notice explicitly prohibits text/data mining, ML/AI/LLM development, archived datasets and commercial use. Permission requests: notificaciones@eltiempo.com"
+  - name: El Espectador
+    domain: elespectador.com
+    entity: elespectador.com
+    tier: press
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: La Silla Vacia
+    domain: lasillavacia.com
+    entity: lasillavacia.com
+    tier: press
+    audit_status: red
+    rss_url: null
+    notes: ""
+  - name: Semana
+    domain: semana.com
+    entity: semana.com
+    tier: press
+    audit_status: pending
+    rss_url: null
+    notes: "robots.txt disallows technical routes only; no anti-AI clause. ToS not yet reviewed."
+  - name: El Pais (ES)
+    domain: elpais.com
+    entity: elpais.com
+    tier: press
+    audit_status: amber
+    rss_url: null
+    notes: ""
+  - name: BBC
+    domain: bbc.com
+    entity: bbc.com
+    tier: press
+    audit_status: red
+    rss_url: null
+    notes: ""
+  - name: Infobae
+    domain: infobae.com
+    entity: infobae.com
+    tier: press
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: El Colombiano
+    domain: elcolombiano.com
+    entity: elcolombiano.com
+    tier: press
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Caracol Radio
+    domain: caracol.com.co
+    entity: caracol.com.co
+    tier: press
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: CNN en Espanol
+    domain: cnnespanol.cnn.com
+    entity: cnn.com
+    tier: press
+    audit_status: red
+    rss_url: null
+    notes: ""
+  - name: Portafolio
+    domain: portafolio.co
+    entity: portafolio.co
+    tier: press
+    audit_status: red
+    rss_url: null
+    notes: ""
+  - name: W Radio
+    domain: wradio.com.co
+    entity: wradio.com.co
+    tier: press
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: La Republica
+    domain: larepublica.co
+    entity: larepublica.co
+    tier: press
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: RCN Radio
+    domain: rcnradio.com
+    entity: rcnradio.com
+    tier: press
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Deutsche Welle
+    domain: dw.com
+    entity: dw.com
+    tier: press
+    audit_status: red
+    rss_url: null
+    notes: ""
+  - name: Blu Radio
+    domain: bluradio.com
+    entity: bluradio.com
+    tier: press
+    audit_status: amber
+    rss_url: null
+    notes: "Partial, reactive opt-out (GPTBot and ChatGPT-User only). Consult before ingesting."
+  - name: The New York Times
+    domain: nytimes.com
+    entity: nytimes.com
+    tier: press
+    audit_status: red
+    rss_url: null
+    notes: ""
+  - name: France 24
+    domain: france24.com
+    entity: france24.com
+    tier: press
+    audit_status: red
+    rss_url: null
+    notes: ""
+  - name: El Pais (Cali)
+    domain: elpais.com.co
+    entity: elpais.com.co
+    tier: press
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Reuters
+    domain: reuters.com
+    entity: reuters.com
+    tier: press
+    audit_status: amber
+    rss_url: null
+    notes: ""
+  - name: El Heraldo
+    domain: elheraldo.co
+    entity: elheraldo.co
+    tier: press
+    audit_status: amber
+    rss_url: null
+    notes: ""
+  - name: La FM
+    domain: lafm.com.co
+    entity: lafm.com.co
+    tier: press
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Cambio
+    domain: cambiocolombia.com
+    entity: cambiocolombia.com
+    tier: press
+    audit_status: pending
+    rss_url: null
+    notes: ""
+  - name: Vanguardia
+    domain: vanguardia.com
+    entity: vanguardia.com
+    tier: press
+    audit_status: amber
+    rss_url: null
+    notes: ""
