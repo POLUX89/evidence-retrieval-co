@@ -170,6 +170,24 @@ python -m evidence_retrieval_co.source_registry --top 40
   warning in DESIGN.md §5: it must be audited and complemented with sources they
   do not cite, not adopted as-is.
 
+## robots.txt audit (derived artifact)
+
+`data/registry/robots_audit.csv` records what each audited domain's robots.txt
+grants, for the 74 domains that seed [`PERMISSIONS.md`](PERMISSIONS.md). Built
+by `src/evidence_retrieval_co/robots_audit.py`, which fetches **only**
+`/robots.txt` — never article content — with the same identified, throttled,
+cached fetcher used for the corpus. Fetched 2026-08-14; raw files are cached in
+the git-ignored `data/cache/robots/`.
+
+Unlike the source registry, this is a **dated snapshot, not a reproducible
+derivation**: policies change, which is precisely why every row carries a review
+date. Re-running it against the cache reproduces the same table; re-running it
+against the live web is a new audit.
+
+Columns: `domain, entity, tier, robots_found, wildcard_verdict,
+ai_agents_blocked, has_ai_clause, feed_hint, checked_date`. Only verdicts are
+committed, never the fetched files.
+
 ## Distribution & maintenance
 
 The cache and raw tables are **not distributed** — they stay local and
