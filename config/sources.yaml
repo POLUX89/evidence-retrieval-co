@@ -369,9 +369,9 @@ sources:
     domain: elespectador.com
     entity: elespectador.com
     tier: press
-    audit_status: pending
+    audit_status: red
     rss_url: null
-    notes: ""
+    notes: "ToS reviewed 2026-08-14: no anti-AI clause, but the copyright paragraph forbids reproduction, transformation, storage and access without prior written authorization, expressly including gratuitous use. Authorization is requestable."
   - name: La Silla Vacia
     domain: lasillavacia.com
     entity: lasillavacia.com
@@ -383,9 +383,9 @@ sources:
     domain: semana.com
     entity: semana.com
     tier: press
-    audit_status: pending
+    audit_status: red
     rss_url: null
-    notes: "robots.txt disallows technical routes only; no anti-AI clause. ToS not yet reviewed."
+    notes: "ToS reviewed 2026-08-14: grants a view-and-cache licence only, and denies any licence to download, reproduce, transform or compile, or to make derivative works. Authorization is requestable."
   - name: El Pais (ES)
     domain: elpais.com
     entity: elpais.com

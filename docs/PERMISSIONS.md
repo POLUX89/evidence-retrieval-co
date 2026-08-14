@@ -18,10 +18,12 @@ green, it must state what that clearance covers before any collection runs.
 | **pending** | Not yet reviewed. Treated exactly like red by the collector. |
 
 Status was assigned by an explicit, conservative rule so it can be audited:
-`red` when the Terms of Service prohibit mining/AI use, or when robots.txt
-blocks 7 or more of the AI crawlers listed below; `amber` when it blocks
-between 1 and 6; `pending` when no anti-AI clause was found — because absence
-of a block is not permission, only absence of a machine-readable refusal.
+`red` when the Terms of Service prohibit what this project would do — download,
+store, transform or compile the content — **whether or not the clause names
+AI**, or when robots.txt blocks 7 or more of the AI crawlers listed below;
+`amber` when robots.txt blocks between 1 and 6 of them; `pending` when neither
+has been found — because absence of a block is not permission, only absence of
+a machine-readable refusal.
 
 ## Principles (DESIGN.md §6)
 
@@ -69,23 +71,57 @@ It becomes a per-row obligation as soon as a row turns green.
 - **Anti-AI clauses are a press phenomenon**: 13 of the 14 domains that block
   AI crawlers are outlets. The exception is `cancilleria.gov.co`, the only
   official domain to do so — worth a formal request under Ley 1712.
-- **The most-cited outlet is refused.** El Tiempo (827 articles) prohibits
-  mining and AI training in its legal notice and blocks 8 crawlers.
-- **The two strongest candidates are `elespectador.com` (596 articles) and
-  `semana.com` (447)**: both without an anti-AI clause. They are where the ToS
-  review should start.
+- **The three most-cited outlets are all refused, and robots.txt caught only
+  one of them.** El Tiempo (827 articles) prohibits mining and AI training by
+  name and blocks 8 crawlers. `elespectador.com` (596) and `semana.com` (447)
+  have clean robots.txt and no anti-AI clause anywhere — yet their Terms of
+  Service prohibit exactly this pipeline. **Auditing robots.txt alone would
+  have cleared both**, which is why the design doc calls robots.txt the floor.
+- **The blocking clause is rarely labelled "AI".** In both cases it sits in the
+  ordinary copyright paragraph, written before generative AI existed and broad
+  enough to cover it. Search a ToS for `almacenamiento`, `reproducción total o
+  parcial`, `transformar`, `compilar` and `sin autorización previa` before
+  searching for `inteligencia artificial`.
 - This confirms the structural bias DESIGN.md §6 predicted: outlets with legal
   capacity are the ones opting out, so the corpus will over-represent
   journalism without a dedicated data policy.
+
+## Terms of Service reviewed
+
+Verdicts are recorded with the operative wording that produced them, so a
+future reader can tell whether the verdict still holds.
+
+**`elespectador.com` — red, 2026-08-14.** No anti-AI or anti-scraping clause
+exists. The prohibition is in the copyright paragraph, which forbids
+"reproducción … transformación, **almacenamiento** o acceso" through any system
+or "tecnología creada o por crearse", "sin autorización previa y escrita"; a
+later paragraph covers content being "duplicarse … almacenarse"
+"independientemente que sea de forma onerosa o gratuita" — so non-commercial
+research is explicitly included. The site's AI section describes *its own* use
+of AI and its adoption of the Global Principles for AI, an industry framework
+that demands consent for training use. It grants nothing to third parties.
+
+**`semana.com` — red, 2026-08-14.** The licence granted is to view content and
+hold a browser cache "únicamente", plus printing "para uso exclusivamente
+personal y privado". It then denies any licence "para descargar, reproducir o
+copiar … transformar … compilar", or to make "inclusiones en compilatorios u
+otra forma de obras derivadas", and warns of civil and criminal consequences
+and destruction of copies. Building a retrieval index is compiling and
+transforming, so this is a direct refusal.
+
+Both name the same way out — prior, express, written authorization — which
+makes them **formal-request candidates rather than closed doors**, unlike El
+Tiempo's targeted opt-out from AI training. That request is a decision carried
+in [`NEXT.md`](../NEXT.md).
 
 ## Press (tier 2 — the one with a clock)
 
 | Domain | Host | Articles | robots.txt | AI agents blocked | ToS (AI/mining) | Status | Reviewed |
 |---|---|---:|---|---|---|---|---|
 | eltiempo.com | — | 827 | partial | 8: GPTBot, ChatGPT-User, CCBot, ClaudeBot, anthropic-ai, PerplexityBot, Bytespider, meta-externalagent | prohibits AI/mining | **red** | 2026-08-14 |
-| elespectador.com | — | 596 | partial | none found | not reviewed | **pending** | 2026-08-14 |
+| elespectador.com | — | 596 | partial | none found | prohibits storage/transformation | **red** | 2026-08-14 |
 | lasillavacia.com | — | 576 | partial | 10: Google-Extended, GPTBot, ChatGPT-User, CCBot, ClaudeBot, anthropic-ai, PerplexityBot, Applebot-Extended, Bytespider, meta-externalagent | not reviewed | **red** | 2026-08-14 |
-| semana.com | — | 447 | partial | none found | not reviewed | **pending** | 2026-08-14 |
+| semana.com | — | 447 | partial | none found | no licence to copy/transform/compile | **red** | 2026-08-14 |
 | elpais.com | — | 412 | partial | 4: CCBot, ClaudeBot, PerplexityBot, Bytespider | not reviewed | **amber** | 2026-08-14 |
 | bbc.com | — | 400 | partial | 10: Google-Extended, GPTBot, ChatGPT-User, CCBot, ClaudeBot, anthropic-ai, PerplexityBot, Applebot-Extended, Bytespider, meta-externalagent | not reviewed | **red** | 2026-08-14 |
 | infobae.com | — | 358 | partial | none found | not reviewed | **pending** | 2026-08-14 |
